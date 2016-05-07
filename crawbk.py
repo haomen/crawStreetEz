@@ -11,7 +11,7 @@ import csv
 
 def crawStEz(amenity,page_num):
     #query on <amenity> for all buildings in nyc from strEz web
-    url='http://www.streeteasy.com/buildings/manhattan/building_amenities:%s?page=%s'%(amenity,page_num)
+    url='http://www.streeteasy.com/buildings/brooklyn/building_amenities:%s?page=%s'%(amenity,page_num)
     #http://streeteasy.com/buildings/nyc/building_amenities:parking%7Carea:119,139,144,135,101
     print 'url: %s'%url
     req=urllib2.Request(url)
@@ -25,7 +25,7 @@ def runforsix(amenity):
     # run crawStEz and parse for the amenity specified
     #amenity = sys.argv[1]
     print 'processing amenity: %s'%amenity
-    filename = '%s_mh.csv'%(amenity)
+    filename = '%s_bk.csv'%(amenity)
     # write out in <filename>
     writer = csv.writer(open(filename, 'w'))
     writer.writerow(['name', 'address']) 
@@ -68,11 +68,12 @@ if __name__=="__main__":
         amenity = sys.argv[1]
         runforsix(amenity)
     elif sys.argv[1] == 'all':
-        #runforsix('leed_registration')
+        runforsix('leed_registration')
         runforsix('gym')
-        runforsix('laundry')
+
         runforsix('pool')
         runforsix('parking')
+        runforsix('laundry')
         runforsix('doorman')
     else:
         print 'should be:'+sys.argv[0]+' <amenity: all, or leed_registration, doorman, gym, laundry, pool, parking>'
