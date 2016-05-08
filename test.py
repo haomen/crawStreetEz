@@ -122,6 +122,13 @@ for row in reader5:
         dicttowrite[row[0]] = row[1:]
 # write dictionary to csv file
 for key, value in dicttowrite.iteritems():
+    # if address is not empty and starts with 'At ', then remove at
+    if value[6].startswith('At'):
+        value[6]=value[6][3:]
+    # if address is empty, assume name is address, copy name
+    elif value[6]=='':
+        value[6]=value[5]
+        # print value[6]
     temp = value
     temp.insert(0,key)
     writer.writerow(temp)
